@@ -410,6 +410,14 @@ nav .fas{
     display: none;
 }
 
+#closemenuu{
+    display: none;
+}
+
+#openmenuu{
+    display: none;
+}
+
 @media only screen and (max-width: 600px){
     
     #header{
