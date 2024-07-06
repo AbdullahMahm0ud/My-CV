@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/c956b0b5a8.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<!---------------------------------------------Home--------------------------------------------->
+    <div id="header">
+        <div class="container">
+            <nav>
+                <img src="images/Mylogoupdated.png" class="logo">
+                <ul>
+                    <li><a href="#header">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#profile">Portfilio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-text">
+                <p>Software Engineer</p>
+                <h1>Hi, I'm <span>Abdullah</span><br>A Passionate Programmer</h1>
+            </div>
+        </div>
+    </div>
+
+<!---------------------------------------------About--------------------------------------------->
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="about-col-1">
+                    <img src="images/about.png">
+                </div>
+
+                <div class="about-col-2">
+                    <h1 class="sub-title">About Me</h1>
+                    <p>Hello, my name is Abdullah. I am currently a 4th-year Computer Engineering student at ACU University. I specialize in front-end web development, with a strong proficiency in C++, HTML, CSS, JavaScript, React, and Node.js. My passion lies in creating dynamic and responsive web applications that offer a seamless user experience. With a solid technical foundation and a keen eye for design, I am dedicated to continuously improving my skills and contributing to innovative web development projects.</p>
+                    <div class="tab-titles">
+                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                        <p class="tab-links" onclick="opentab('education')">Education</p>
+                    </div>
+                
+                    <div class="tab-contents active-tab" id="skills">
+                        <ul> 
+                            <li><span>Programming Languages</span><br>C++, HTML, CSS, JavaScript</li>
+                            <li><span>Frameworks</span><br>React, Node.js</li>
+                            <li><span>Problem-Solving</span><br>Analytical and Debugging Skillst</li>
+                            <li><span>Web Development</span><br>Front-End Web Development</li>
+                            <li><span>Collaboration</span><br>Teamwork and Communication Abilities</li>
+                        </ul>
+                    </div>
+                
+                    <div class="tab-contents" id="experience">
+                        <ul>
+                            <li><span>Enactus Organization Member: (2021 – 2023)</span><br>Engaged in creative and critical thinking to solve problems<br>Collaborated with a team to develop innovative solutions for various challenges</li>
+                            <li><span>ALX Egypt Student: (2022 – 2024)</span><br>Studied C and JavaScript programming languages<br>Developed a strong foundation in software development principles</li>
+                            <li><span>Ahram Canadian University EXPO Participant: (2024)</span><br>Presented a project on a face recognition system</li>
+                            <li><span>Code Camp Participant: (August 2023 – Present)</span><br>Focused on responsive web development and JavaScript<br>Enhanced skills in creating user-friendly and dynamic web applications</li>
+                        </ul>
+                    </div>
+                
+                    <div class="tab-contents" id="education">
+                        <ul>
+                            <li><span>Bachelor of Computer Engineering</span><br>ACU University, Egypt</li>
+                            <li><span>Relevant coursework</span><br>Data Structures, Algorithms, Web Development, Software Engineering</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!---------------------------------------------Services--------------------------------------------->
+    <div id="services">
+        <div class="container">
+            <h1 class="sub-title">My Services</h1>
+            <div class="services-list">
+                <div>
+                    <i class="fa-solid fa-file-code"></i>
+                    <h2>Front-End Web Development</h2>
+                    <p>Specializing in creating visually appealing, responsive, and user-friendly websites. Utilizing technologies such as HTML, CSS, JavaScript, React, and Node.js to deliver high-quality web applications.</p>
+                    <a href="https://en.wikipedia.org/wiki/Front-end_web_development" target="_blank">Learn more</a>
+                </div>
+
+                <div>
+                    <i class="fa-brands fa-react"></i>
+                    <h2>JavaScript and React Development</h2>
+                    <p>Providing expertise in JavaScript and React to build dynamic and efficient web applications. Focused on creating seamless user experiences with modern web technologies.</p>
+                    <a href="https://en.wikipedia.org/wiki/React_(JavaScript_library)" target="_blank">Learn more</a>
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-terminal"></i>
+                    <h2>Web Apps Troubleshooting and Optimization</h2>
+                    <p>Offering comprehensive troubleshooting and optimization services to enhance the performance and functionality of existing web applications.</p>
+                    <a href="https://en.wikipedia.org/wiki/Web_application" target="_blank">Learn more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!---------------------------------------------Profile--------------------------------------------->
+<div id="profile">
+    <div class="container">
+        <div class="sub-title">My Work</div>
+        <div class="work-list">
+            <div class="work">
+                <img src="images/comeonman.png" style="scale: 1.009;">
+                <div class="layer">
+                    <h3 style="font-size: 30px;"><b>Systems Engineering</b></h3>
+                    <p style="font-size: 20px;"><b>Building and maintaining systems with technologies like React, Node.js, and Arduino. Expertise in scalable architectures, component integration, and lifecycle management from concept to deployment.</b></p>
+                    <a href="#" target="_blank"><i class="fa-solid fa-link"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/goddamnit.png">
+                <div class="layer">
+                    <h3 style="font-size: 30px;"><b>Hardware Projects</b></h3>
+                    <p style="font-size: 20px;"><b>Expertise in designing and building innovative hardware systems using Arduino. Successfully developed projects such as a firefighter Arduino car and a maze-solving Arduino car, demonstrating strong skills in electronics, programming, and problem-solving.</b></p>
+                    <a href="#" target="_blank"><i class="fa-solid fa-link"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/WORK3.png" >
+                <div class="layer">
+                    <h3 style="font-size: 30px;"><b>Software Development</b></h3>
+                    <p style="font-size: 20px;"><b>Creating robust applications using JavaScript, C++, HTML, CSS, and other modern development practices. Skilled in designing and maintaining efficient, high-quality software solutions.</b></p>
+                    <a href="https://github.com/Aloxen1?tab=repositories" target="_blank"><i class="fa-solid fa-link"></i></a>
+                </div>
+            </div>
+        </div>
+        <a href="https://www.linkedin.com/in/abdullah-mahmoud-kamel/" target="_blank" class="btn">See More</a>
+    </div>
+</div>
+<!---------------------------------------------Contact--------------------------------------------->
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Me</h1>
+                <p><i class="fa-solid fa-at"></i> kingspeedx11@gmail.com</p>
+                <p><i class="fa-brands fa-whatsapp"></i> 0111 265 0802</p>
+                <div class="social-icons">
+                    <a href="https://x.com/Aloxen2" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://github.com/Aloxen1" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.instagram.com/abdullah_8ambr/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/abdullah-mahmoud-kamel/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+                <a class="btn btn2" href="Abdullah.pdf" download>Download CV</a>
+            </div>
+            <div class="contact-right">
+                <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="text" name="email" placeholder="Your Email" required>
+                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+                <span id="msg"></span>
+            </div>
+        </div>
+    </div>
+    <div class="copywrite">
+        <p>Copyright &copy; Abdullah. Done goofed <3. </p>
+    </div>
+</div>
+
+
+
+    <script>
+
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+
+    function opentab(tabname) {
+        for (tablink of tablinks) {
+            tablink.classList.remove("active-link");
+        }
+        for (tabcontent of tabcontents) {
+            tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab")
+    }
+
+    </script>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyg1cloOgYUpu-g9POahyfQ7LhWMN4TgPYIP2uC3-1y0tTgnyvu_Amy6IVonQbzQDYo7w/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById("msg")
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msg.innerHTML = "Message sent successfully!"
+                setTimeout((function() {
+                    msg.innerHTML = " "
+                }), 5000)
+                form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
+</body>
+</html>
+
+<!--fml-->
