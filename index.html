@@ -12,14 +12,16 @@
     <div id="header">
         <div class="container">
             <nav>
-                <img src="images/Mylogoupdated.png" class="logo">
-                <ul>
+                <img id="logoo" src="images/Mylogoupdated.png" class="logo">
+                <ul id="sidemenu">
                     <li><a href="#header">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#profile">Portfilio</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <i id="closemenuu" class="fas fa-times" onclick="closeMenu()"></i>
                 </ul>
+                <i class="fas fa-bars" onclick="openMenu()"></i>
             </nav>
             <div class="header-text">
                 <p>Software Engineer</p>
@@ -203,6 +205,19 @@
             })
             .catch(error => console.error('Error!', error.message))
         })
+      </script>
+      <script>
+
+        var sidemenu = document.getElementById("sidemenu");
+
+        function openMenu() {
+            sidemenu.style.right = 0
+        }
+
+        function closeMenu() {
+            sidemenu.style.right = "-200px"
+        }
+
       </script>
 </body>
 </html>
