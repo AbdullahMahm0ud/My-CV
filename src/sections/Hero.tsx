@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ArrowRight, Shield, Zap, Lock, Activity, ChevronDown } from 'lucide-react';
-import AnimatedHeroBackground from '../components/AnimatedHeroBackground';
+import AnimatedHeroBackground from '../components/ui/AnimatedHeroBackground';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);

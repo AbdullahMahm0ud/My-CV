@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import VelocityBlurText from '../components/VelocityBlurText';
+import VelocityBlurText from '../components/ui/VelocityBlurText';
 
 gsap.registerPlugin(ScrollTrigger);
 
