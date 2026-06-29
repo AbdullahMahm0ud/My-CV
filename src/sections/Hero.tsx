@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import NeonMatrix from '../components/NeonMatrix';
+import NeonMatrix from '../components/ui/NeonMatrix'
 
 gsap.registerPlugin(ScrollTrigger);
 

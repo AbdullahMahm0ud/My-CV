@@ -3,7 +3,7 @@ import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import CustomCursor from './components/CustomCursor';
+import CustomCursor from './components/ui/CustomCursor'
 import Navigation from './sections/Navigation';
 import Hero from './sections/Hero';
 import About from './sections/About';
