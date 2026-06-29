@@ -1,101 +1,246 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import VelocityBlurText from '../components/ui/VelocityBlurText'
+import { Shield, Zap, Users, ChevronRight, Cpu, Globe, Eye } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    icon: 'fa-solid fa-code',
-    title: 'Web Development',
-    description:
-      'Building responsive, performant websites using modern HTML, CSS, and JavaScript. From landing pages to complex web applications with clean, maintainable code.',
-    link: 'https://en.wikipedia.org/wiki/Front-end_web_development',
+    icon: Cpu,
+    title: 'AI Threat Intelligence',
+    description: 'Machine learning algorithms that continuously analyze global threat data to predict and prevent attacks before they happen.',
+    features: ['Behavioral Analysis', 'Zero-Day Detection', 'Threat Prediction'],
+    color: '#00f5ff',
   },
   {
-    icon: 'fa-brands fa-react',
-    title: 'React Development',
-    description:
-      'Creating dynamic single-page applications with React. Component-based architecture, state management, and seamless user experiences with modern development practices.',
-    link: 'https://en.wikipedia.org/wiki/React_(JavaScript_library)',
+    icon: Zap,
+    title: 'Instant Response',
+    description: 'Automated incident response with sub-second reaction times to neutralize threats before any damage occurs.',
+    features: ['Auto-Containment', 'Forensic Capture', 'Recovery Automation'],
+    color: '#a855f7',
   },
   {
-    icon: 'fa-solid fa-bug-slash',
-    title: 'Optimization & Debugging',
-    description:
-      'Troubleshooting and optimizing web applications for peak performance. Identifying bottlenecks, fixing bugs, and ensuring smooth, efficient operation across all devices.',
-    link: 'https://en.wikipedia.org/wiki/Web_application',
+    icon: Globe,
+    title: 'Global Monitoring',
+    description: '24/7 monitoring of your entire digital footprint across cloud, on-premise, and hybrid infrastructures.',
+    features: ['Multi-Cloud', 'Endpoint Coverage', 'Network Visibility'],
+    color: '#10b981',
+  },
+  {
+    icon: Eye,
+    title: 'Vulnerability Scanning',
+    description: 'Continuous assessment of your security posture with actionable remediation recommendations.',
+    features: ['CVE Database', 'Risk Scoring', 'Patch Guidance'],
+    color: '#f59e0b',
+  },
+  {
+    icon: Shield,
+    title: 'Compliance Management',
+    description: 'Automated compliance reporting for SOC 2, ISO 27001, GDPR, HIPAA, and industry regulations.',
+    features: ['Audit Reports', 'Policy Enforcement', 'Evidence Collection'],
+    color: '#ec4899',
+  },
+  {
+    icon: Users,
+    title: 'Security Consulting',
+    description: 'Expert guidance from certified security professionals to strengthen your security strategy.',
+    features: ['Architecture Review', 'Penetration Testing', 'Training'],
+    color: '#ff6b6b',
   },
 ];
 
-export default function Services() {
+const Services = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const cardsRef = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
-    const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
-    if (cards.length === 0) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        '.services-heading',
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+            once: true,
+          },
+        }
+      );
 
-    gsap.fromTo(
-      cards,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        stagger: 0.15,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 75%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
+      cardsRef.current.forEach((card, index) => {
+        gsap.fromTo(
+          card,
+          { rotateX: 45, opacity: 0, y: 50 },
+          {
+            rotateX: 0,
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            delay: index * 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 60%',
+              once: true,
+            },
+          }
+        );
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
-  return (
-    <section id="services" ref={sectionRef} className="py-[60px] md:py-[120px] bg-bg-dark">
-      <div className="max-w-[1200px] mx-auto px-5 md:px-10">
-        <VelocityBlurText
-          text="My Services"
-          className="sub-title font-display text-4xl md:text-5xl lg:text-[60px] font-bold tracking-[-1.5px] text-text-primary"
-          as="h2"
-        />
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
+    const card = cardsRef.current[index];
+    if (!card) return;
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[30px] mt-16">
-          {services.map((service, i) => (
-            <div
-              key={i}
-              ref={(el) => { cardsRef.current[i] = el; }}
-              className="service-card-hover corner-accent relative bg-bg-card border border-[rgba(0,240,255,0.06)] rounded-lg p-10 md:p-12 transition-all duration-400 hover:border-[rgba(0,240,255,0.2)] hover:-translate-y-1 group"
-              style={{ transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)' }}
-            >
-              <i
-                className={`${service.icon} text-[40px] text-cyan-bright mb-6 block`}
-              />
-              <h3 className="font-display text-xl md:text-2xl font-bold tracking-[-0.5px] text-text-primary mb-4">
-                {service.title}
-              </h3>
-              <p className="font-body text-base text-text-secondary leading-relaxed">
-                {service.description}
-              </p>
-              <a
-                href={service.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-6 font-body text-sm font-semibold tracking-wider uppercase text-cyan-bright hover:text-blue-neon transition-colors duration-300 group/link"
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = (y - centerY) / 25;
+    const rotateY = (centerX - x) / 25;
+
+    gsap.to(card, {
+      rotateX: -rotateX,
+      rotateY: rotateY,
+      duration: 0.3,
+      ease: 'power2.out',
+    });
+  };
+
+  const handleMouseLeave = (index: number) => {
+    const card = cardsRef.current[index];
+    if (!card) return;
+
+    gsap.to(card, {
+      rotateX: 0,
+      rotateY: 0,
+      duration: 0.5,
+      ease: 'power2.out',
+    });
+  };
+
+  return (
+    <section
+      ref={sectionRef}
+      id="services"
+      className="relative py-24 px-6"
+      style={{ perspective: '2000px' }}
+    >
+      <div className="max-w-7xl mx-auto">
+        {/* Heading */}
+        <div className="services-heading text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 glass rounded-full mb-6">
+            <div className="w-2 h-2 bg-[#00f5ff] rounded-full" />
+            <span className="text-xs font-medium tracking-wider uppercase text-[#00f5ff]">
+              Our Services
+            </span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-['Orbitron'] mb-4">
+            Comprehensive <span className="text-gradient-cyan">Security</span> Suite
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            End-to-end cybersecurity services powered by AI and delivered by experts 
+            with decades of combined experience.
+          </p>
+        </div>
+
+        {/* Service Cards Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            return (
+              <div
+                key={index}
+                ref={(el) => {
+                  if (el) cardsRef.current[index] = el;
+                }}
+                className="relative group cursor-pointer"
+                style={{ transformStyle: 'preserve-3d' }}
+                onMouseMove={(e) => handleMouseMove(e, index)}
+                onMouseLeave={() => handleMouseLeave(index)}
               >
-                Learn More
-                <span className="inline-block ml-1 transition-transform duration-300 group-hover/link:translate-x-1">
-                  &rarr;
-                </span>
-              </a>
-            </div>
-          ))}
+                {/* Glow Effect */}
+                <div className="card-glow absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background: `radial-gradient(circle at 50% 50%, ${service.color}15, transparent 70%)`
+                  }}
+                />
+
+                {/* Card Content */}
+                <div 
+                  className="relative h-full glass rounded-2xl p-6 border border-white/5 group-hover:border-[#00f5ff]/30 transition-all duration-300 overflow-hidden"
+                >
+                  {/* Background Gradient */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{
+                      background: `linear-gradient(135deg, ${service.color}08, transparent)`
+                    }}
+                  />
+
+                  {/* Icon */}
+                  <div className="relative mb-5">
+                    <div 
+                      className="w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-300"
+                      style={{ backgroundColor: `${service.color}15` }}
+                    >
+                      <Icon className="w-7 h-7" style={{ color: service.color }} />
+                    </div>
+                    <div 
+                      className="absolute inset-0 w-14 h-14 rounded-xl border scale-100 group-hover:scale-150 opacity-0 group-hover:opacity-100 transition-all duration-500"
+                      style={{ borderColor: `${service.color}40` }}
+                    />
+                  </div>
+
+                  {/* Content */}
+                  <h3 className="relative text-lg font-bold font-['Orbitron'] mb-3 group-hover:text-[#00f5ff] transition-colors duration-300">
+                    {service.title}
+                  </h3>
+                  <p className="relative text-gray-400 text-sm leading-relaxed mb-5">
+                    {service.description}
+                  </p>
+
+                  {/* Features */}
+                  <ul className="relative space-y-2 mb-5">
+                    {service.features.map((feature, fIndex) => (
+                      <li
+                        key={fIndex}
+                        className="flex items-center gap-2 text-xs text-gray-500"
+                      >
+                        <div 
+                          className="w-1.5 h-1.5 rounded-full"
+                          style={{ backgroundColor: service.color }}
+                        />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* CTA */}
+                  <div className="relative flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all duration-300"
+                    style={{ color: service.color }}
+                  >
+                    Learn More
+                    <ChevronRight className="w-4 h-4" />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Services;

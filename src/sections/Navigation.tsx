@@ -1,133 +1,156 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { Menu, X, Search, Shield } from 'lucide-react';
 import gsap from 'gsap';
 
-interface NavigationProps {
-  onNavigate: (target: string) => void;
-}
-
-export default function Navigation({ onNavigate }: NavigationProps) {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+const Navigation = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
 
   const navLinks = [
-    { label: 'Home', target: '#hero' },
-    { label: 'About', target: '#about' },
-    { label: 'Services', target: '#services' },
-    { label: 'Portfolio', target: '#portfolio' },
-    { label: 'Contact', target: '#contact' },
+    { name: 'Platform', href: '#platform' },
+    { name: 'Services', href: '#services' },
+    { name: 'Workflow', href: '#workflow' },
+    { name: 'Security', href: '#security' },
+    { name: 'Scale', href: '#scalability' },
   ];
 
   useEffect(() => {
-    const heroEl = document.getElementById('hero');
-    if (!heroEl) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setScrolled(!entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(heroEl);
-    return () => observer.disconnect();
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
-    if (menuOpen && menuRef.current) {
-      const items = menuRef.current.querySelectorAll('.mobile-menu-item');
+    const ctx = gsap.context(() => {
       gsap.fromTo(
-        items,
-        { opacity: 0, x: -30 },
-        { opacity: 1, x: 0, duration: 0.4, ease: 'power2.out', stagger: 0.08 }
+        navRef.current,
+        { y: -100, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.2 }
       );
-    }
-  }, [menuOpen]);
 
-  function handleNav(target: string) {
-    onNavigate(target);
-    setMenuOpen(false);
-  }
+      gsap.fromTo(
+        '.nav-link',
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, duration: 0.4, stagger: 0.05, delay: 0.5, ease: 'power2.out' }
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  const handleLinkHover = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    gsap.to(e.currentTarget, {
+      scale: 1.05,
+      color: '#00f5ff',
+      duration: 0.2,
+      ease: 'power2.out',
+    });
+  };
+
+  const handleLinkLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    gsap.to(e.currentTarget, {
+      scale: 1,
+      color: '#ffffff',
+      duration: 0.2,
+      ease: 'power2.out',
+    });
+  };
 
   return (
-    <>
-      <nav
-        ref={navRef}
-        className={`fixed top-0 left-0 w-full z-[1000] px-6 md:px-10 py-5 flex items-center justify-between transition-all duration-400 ${
-          scrolled
-            ? 'bg-[rgba(11,12,16,0.9)] backdrop-blur-[12px] border-b border-[rgba(0,240,255,0.08)]'
-            : 'bg-transparent'
+    <nav
+      ref={navRef}
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 tech-ease ${
+        isScrolled
+          ? 'w-[95%] max-w-6xl glass-dark rounded-2xl py-3 px-6 border border-[#00f5ff]/20'
+          : 'w-[95%] max-w-7xl bg-transparent py-4 px-6'
+      }`}
+    >
+      <div className="flex items-center justify-between">
+        {/* Logo */}
+        <div className="flex items-center gap-3">
+          <div className="relative w-10 h-10 flex items-center justify-center">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#00f5ff]/30 to-[#a855f7]/30 rounded-lg animate-pulse" />
+            <Shield className="w-6 h-6 text-[#00f5ff] relative z-10" />
+          </div>
+          <span className="text-xl font-bold tracking-wider font-['Orbitron']">
+            NG<span className="text-gradient-cyan">FW</span>
+          </span>
+        </div>
+
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="nav-link text-sm font-medium tracking-wide hover:text-[#00f5ff] transition-colors tech-ease"
+              onMouseEnter={handleLinkHover}
+              onMouseLeave={handleLinkLeave}
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
+
+        {/* Right Side */}
+        <div className="flex items-center gap-4">
+          <button className="hidden md:flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors">
+            <Search className="w-5 h-5 text-gray-400" />
+          </button>
+          
+          <a
+            href="#cta"
+            className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#00f5ff] to-[#00d4ff] text-[#070a10] text-sm font-bold rounded-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,245,255,0.4)]"
+          >
+            Get Started
+          </a>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6 text-white" />
+            ) : (
+              <Menu className="w-6 h-6 text-white" />
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-500 tech-ease ${
+          isMobileMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
         }`}
       >
-        <a
-          href="#hero"
-          onClick={(e) => {
-            e.preventDefault();
-            handleNav('#hero');
-          }}
-          className="cursor-pointer"
-        >
-          <img
-            src="/images/Mylogoupdated.png"
-            alt="Logo"
-            className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover"
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.display = 'none';
-            }}
-          />
-        </a>
-
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-10">
+        <div className="flex flex-col gap-4 py-4 border-t border-white/10">
           {navLinks.map((link) => (
             <a
-              key={link.target}
-              href={link.target}
-              onClick={(e) => {
-                e.preventDefault();
-                handleNav(link.target);
-              }}
-              className="nav-link-underline font-body text-base font-medium tracking-wide text-text-primary hover:text-cyan-bright transition-colors duration-300"
+              key={link.name}
+              href={link.href}
+              className="text-sm font-medium tracking-wide hover:text-[#00f5ff] transition-colors py-2"
+              onClick={() => setIsMobileMenuOpen(false)}
             >
-              {link.label}
+              {link.name}
             </a>
           ))}
-        </div>
-
-        {/* Mobile Hamburger */}
-        <button
-          className="md:hidden text-text-primary text-2xl cursor-pointer"
-          onClick={() => setMenuOpen(true)}
-          aria-label="Open menu"
-        >
-          <i className="fas fa-bars" />
-        </button>
-      </nav>
-
-      {/* Mobile Menu Overlay */}
-      {menuOpen && (
-        <div ref={menuRef} className="mobile-menu-overlay md:hidden">
-          <button
-            className="absolute top-6 right-6 text-text-primary text-2xl cursor-pointer"
-            onClick={() => setMenuOpen(false)}
-            aria-label="Close menu"
+          <a
+            href="#cta"
+            className="flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-[#00f5ff] to-[#00d4ff] text-[#070a10] text-sm font-bold rounded-lg mt-2"
+            onClick={() => setIsMobileMenuOpen(false)}
           >
-            <i className="fas fa-times" />
-          </button>
-          {navLinks.map((link) => (
-            <a
-              key={link.target}
-              href={link.target}
-              onClick={(e) => {
-                e.preventDefault();
-                handleNav(link.target);
-              }}
-              className="mobile-menu-item font-body text-3xl font-medium text-text-primary hover:text-cyan-bright transition-colors duration-300"
-            >
-              {link.label}
-            </a>
-          ))}
+            Get Started
+          </a>
         </div>
-      )}
-    </>
+      </div>
+    </nav>
   );
-}
+};
+
+export default Navigation;
